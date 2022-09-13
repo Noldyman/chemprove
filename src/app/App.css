@@ -1,0 +1,15 @@
+.app {
+  margin: 0px 10px 10px 10px;
+}
+
+footer {
+  position: fixed;
+  padding: 5px 20px;
+  bottom: 0px;
+  right: 0px;
+  text-align: right;
+  font-size: xx-small;
+  background-color: #1976d2;
+  color: #fff;
+  border-top-left-radius: 5px;
+}
