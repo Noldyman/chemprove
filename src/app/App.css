@@ -1,5 +1,5 @@
 .app {
-  margin: 0px 10px 10px 10px;
+  margin: 80px 10px 10px 10px;
 }
 
 footer {
@@ -9,7 +9,6 @@ footer {
   right: 0px;
   text-align: right;
   font-size: xx-small;
-  background-color: #1976d2;
   color: #fff;
   border-top-left-radius: 5px;
 }

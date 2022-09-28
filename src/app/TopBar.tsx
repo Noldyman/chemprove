@@ -1,14 +1,27 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { AppBar, Toolbar, Tabs, Tab, Typography } from "@mui/material";
+import {
+  useTheme,
+  AppBar,
+  Toolbar,
+  Tabs,
+  Tab,
+  Typography,
+  IconButton,
+} from "@mui/material";
+import { Settings } from "@mui/icons-material";
 
 const navItems = [
   { label: "NMR", path: "/nmr" },
-  { label: "About", path: "/about" },
   { label: "Manual", path: "/manual" },
 ];
 
-export const TopBar = () => {
+interface Props {
+  onSettings: () => void;
+}
+
+export const TopBar = ({ onSettings }: Props) => {
+  const theme = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState(0);
@@ -28,7 +41,10 @@ export const TopBar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="fixed"
+      sx={{ backgroundColor: theme.palette.primary.main }}
+    >
       <Toolbar>
         <Typography
           style={{ cursor: "pointer" }}
@@ -39,9 +55,10 @@ export const TopBar = () => {
           Chemprove
         </Typography>
         <Tabs
-          style={{ margin: "auto" }}
+          style={{ margin: "auto", marginBottom: "0px" }}
           textColor="inherit"
           value={selectedTab}
+          TabIndicatorProps={{ style: { background: "#fff" } }}
         >
           {navItems.map((item, i) => (
             <Tab
@@ -52,6 +69,9 @@ export const TopBar = () => {
             />
           ))}
         </Tabs>
+        <IconButton onClick={onSettings} color="inherit">
+          <Settings />
+        </IconButton>
       </Toolbar>
     </AppBar>
   );
