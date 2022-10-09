@@ -10,7 +10,7 @@ import {
   Tab,
 } from "@mui/material";
 import { TabPanel } from "../../components/TabPanel";
-import { CommonResidues } from "./CommonResidues";
+import { CommonResidues } from "./commonResidues/CommonResidues";
 import { PurityCalculator } from "./PurityCalculator";
 
 export const Nmr = () => {
