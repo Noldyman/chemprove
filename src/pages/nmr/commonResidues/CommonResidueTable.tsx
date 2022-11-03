@@ -1,7 +1,11 @@
 import { useRecoilValue } from "recoil";
 import { nmrSolventState } from "../../../services/nmrSolvent";
 import { H_NMR_COMMON_RESIDUES as commonResidues } from "../../../data/H_NMR_COMMON_RESIDUES";
-import { ChemShift, ISignalObj } from "../../../models/nmrCommonResidues";
+import {
+  ChemShift,
+  ICommonResidue,
+  ISignalObj,
+} from "../../../models/nmrCommonResidues";
 import _ from "lodash";
 import {
   useTheme,
@@ -12,6 +16,7 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
+import { v4 as uuid } from "uuid";
 
 interface IFilters {
   residueName: string;
@@ -22,6 +27,7 @@ interface IFilters {
 
 interface Props {
   filters: IFilters;
+  openResidueDetails: (residue: ICommonResidue) => void;
 }
 
 const columns = [
@@ -32,7 +38,7 @@ const columns = [
   { label: "Chemical shift (PPM)" },
 ];
 
-export const CommonResidueTable = ({ filters }: Props) => {
+export const CommonResidueTable = ({ filters, openResidueDetails }: Props) => {
   const theme = useTheme();
   const selectedSolvent = useRecoilValue(nmrSolventState);
 
@@ -168,20 +174,28 @@ export const CommonResidueTable = ({ filters }: Props) => {
           <TableRow>
             {columns.map((c) => (
               <TableCell
-                key={c.label}
+                key={uuid()}
                 style={{ boxShadow: `0px 1px ${theme.palette.divider}` }}
               >
-                <b>{c.label}</b>
+                <b key={uuid()}>{c.label}</b>
               </TableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
           {filterCommonResidues().map((r) => (
-            <TableRow hover>
+            <TableRow
+              key={uuid()}
+              style={{ cursor: r.smiles ? "pointer" : "" }}
+              hover
+              onClick={() => {
+                if (r.smiles) openResidueDetails(r);
+              }}
+            >
               <TableCell>{r.compound}</TableCell>
               <TableCell>
                 <div
+                  key={uuid()}
                   style={{
                     display: "flex",
                     flexDirection: "column",
@@ -189,23 +203,24 @@ export const CommonResidueTable = ({ filters }: Props) => {
                 >
                   {r.signals.map((s, i) =>
                     typeof s.proton.formula === "string" ? (
-                      <span key={"formula" + i}>{s.proton.formula}</span>
+                      <span key={uuid()}>{s.proton.formula}</span>
                     ) : (
-                      s.proton.formula
+                      <span key={uuid()}>{s.proton.formula}</span>
                     )
                   )}
                 </div>
               </TableCell>
               <TableCell>
                 <div
+                  key={uuid()}
                   style={{
                     display: "flex",
                     flexDirection: "column",
                   }}
                 >
-                  {r.signals.map((s, i) => (
-                    <span key={"mult" + i}>
-                      <sub></sub>
+                  {r.signals.map((s) => (
+                    <span key={uuid()}>
+                      <sub key={uuid()}></sub>
                       {s.proton.multiplicity}
                     </span>
                   ))}
@@ -213,14 +228,15 @@ export const CommonResidueTable = ({ filters }: Props) => {
               </TableCell>
               <TableCell>
                 <div
+                  key={r.id + "numOfProtons"}
                   style={{
                     display: "flex",
                     flexDirection: "column",
                   }}
                 >
                   {r.signals.map((s, i) => (
-                    <span key={"amount" + i}>
-                      <sub></sub>
+                    <span key={uuid()}>
+                      <sub key={uuid()}></sub>
                       {s.proton.amount}
                     </span>
                   ))}
@@ -228,12 +244,13 @@ export const CommonResidueTable = ({ filters }: Props) => {
               </TableCell>
               <TableCell>
                 <div
+                  key={uuid()}
                   style={{
                     display: "flex",
                     flexDirection: "column",
                   }}
                 >
-                  {r.signals.map((s, i) => {
+                  {r.signals.map((s) => {
                     const chemShift = s.chemShifts[selectedSolvent];
                     const shiftIsFilterHit = checkIfChemShiftIsFilterHit(
                       s,
@@ -242,10 +259,13 @@ export const CommonResidueTable = ({ filters }: Props) => {
 
                     if (typeof chemShift === "object") {
                       return (
-                        <span key={"shift" + i}>
-                          <sub></sub>
+                        <span key={uuid()}>
+                          <sub key={uuid()}></sub>
                           {shiftIsFilterHit ? (
-                            <b style={{ color: theme.palette.secondary.main }}>
+                            <b
+                              key={uuid()}
+                              style={{ color: theme.palette.secondary.main }}
+                            >
                               {chemShift?.highShift} - {chemShift?.lowShift}
                             </b>
                           ) : (
@@ -255,10 +275,13 @@ export const CommonResidueTable = ({ filters }: Props) => {
                       );
                     }
                     return (
-                      <span key={"shift" + i}>
-                        <sub></sub>
+                      <span key={uuid()}>
+                        <sub key={uuid()}></sub>
                         {shiftIsFilterHit ? (
-                          <b style={{ color: theme.palette.secondary.main }}>
+                          <b
+                            key={uuid()}
+                            style={{ color: theme.palette.secondary.main }}
+                          >
                             {chemShift}
                           </b>
                         ) : (

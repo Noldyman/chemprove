@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { useRecoilState } from "recoil";
 import { nmrSolventState } from "../../../services/nmrSolvent";
-import { NmrSolvent } from "../../../models/nmrCommonResidues";
+import { ICommonResidue, NmrSolvent } from "../../../models/nmrCommonResidues";
 import {
   useTheme,
   TextField,
@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { HighlightOff } from "@mui/icons-material";
 import { CommonResidueTable } from "./CommonResidueTable";
+import { ResidueDetails } from "./ResidueDetails";
 
 export const nmrSolvents: { label: string; value: NmrSolvent }[] = [
   { label: "Chloroform d", value: "chloroform_d" },
@@ -36,6 +37,9 @@ export const CommonResidues = () => {
   const theme = useTheme();
   const [selectedSolvent, setSelectedSolvent] = useRecoilState(nmrSolventState);
   const [filters, setFilters] = useState(initialFilters);
+  const [residueDetails, setResidueDetails] = useState<
+    ICommonResidue | undefined
+  >();
 
   const handleSolventChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedSolvent(e.target.value as NmrSolvent);
@@ -66,6 +70,14 @@ export const CommonResidues = () => {
 
   const clearFilters = () => {
     setFilters(initialFilters);
+  };
+
+  const openResidueDetails = (residue: ICommonResidue) => {
+    setResidueDetails(residue);
+  };
+
+  const closeResidueDetails = () => {
+    setResidueDetails(undefined);
   };
 
   return (
@@ -175,7 +187,17 @@ export const CommonResidues = () => {
           </Button>
         )}
       </fieldset>
-      <CommonResidueTable filters={filters} />
+      <CommonResidueTable
+        filters={filters}
+        openResidueDetails={openResidueDetails}
+      />
+      {residueDetails && (
+        <ResidueDetails
+          open={Boolean(residueDetails)}
+          onClose={closeResidueDetails}
+          residue={residueDetails}
+        />
+      )}
     </>
   );
 };
