@@ -10,9 +10,10 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import { HighlightOff } from "@mui/icons-material";
+import { Bookmarks, HighlightOff, Quiz } from "@mui/icons-material";
 import { CommonResidueTable } from "./CommonResidueTable";
 import { ResidueDetails } from "./ResidueDetails";
+import { Sources } from "./Sources";
 
 export const nmrSolvents: { label: string; value: NmrSolvent }[] = [
   { label: "Chloroform d", value: "chloroform_d" },
@@ -40,6 +41,7 @@ export const CommonResidues = () => {
   const [residueDetails, setResidueDetails] = useState<
     ICommonResidue | undefined
   >();
+  const [sourcesIsOpen, setSourcesIsOpen] = useState(false);
 
   const handleSolventChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedSolvent(e.target.value as NmrSolvent);
@@ -91,6 +93,25 @@ export const CommonResidues = () => {
         residues in <sup>1</sup>H NMR spectroscopy. The table can be used to
         identify your residues.
       </Typography>
+      <div style={{ display: "flex", gap: "20px", marginBottom: "20px" }}>
+        <Button
+          fullWidth
+          startIcon={<Bookmarks />}
+          variant="outlined"
+          color="inherit"
+          onClick={() => setSourcesIsOpen(true)}
+        >
+          Sources
+        </Button>
+        <Button
+          fullWidth
+          startIcon={<Quiz />}
+          variant="outlined"
+          color="inherit"
+        >
+          Manual
+        </Button>
+      </div>
       <fieldset
         style={{
           border: `1px solid ${theme.palette.divider}`,
@@ -198,6 +219,7 @@ export const CommonResidues = () => {
           residue={residueDetails}
         />
       )}
+      <Sources open={sourcesIsOpen} onClose={() => setSourcesIsOpen(false)} />
     </>
   );
 };
