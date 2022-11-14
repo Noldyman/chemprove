@@ -27,8 +27,8 @@ export const Sources = ({ open, onClose }: Props) => {
           The following sources were used for the common residue table.
         </Typography>
         <List>
-          {sources.map((s) => (
-            <ListItem button onClick={() => window.open(s.url)}>
+          {sources.map((s, i) => (
+            <ListItem key={i} button onClick={() => window.open(s.url)}>
               <ListItemIcon>
                 <Bookmark />
               </ListItemIcon>
