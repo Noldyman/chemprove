@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { TabPanel } from "../../components/TabPanel";
 import { CommonResidues } from "./commonResidues/CommonResidues";
-import { PurityCalculator } from "./PurityCalculator";
+import { PurityCalculator } from "./purityCalculator/PurityCalculator";
 
 export const Nmr = () => {
   const [selectedTab, setSelectedTab] = useState(0);
