@@ -1,5 +1,8 @@
 import { useRecoilValue } from "recoil";
 import { nmrSolventState } from "../../../services/nmrSolvent";
+import { useSetRecoilState } from "recoil";
+import { nmrPurityCalculatorState } from "../../../services/nmrPurityCalculator";
+import { produce } from "immer";
 import { H_NMR_COMMON_RESIDUES as commonResidues } from "../../../data/H_NMR_COMMON_RESIDUES";
 import {
   ChemShift,
@@ -15,8 +18,11 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  IconButton,
 } from "@mui/material";
-import { v4 as uuid } from "uuid";
+import { PlaylistAdd } from "@mui/icons-material";
+import { useState } from "react";
+import { SelectSignalDialog } from "../purityCalculator/SelectSignalDialog";
 
 interface IFilters {
   residueName: string;
@@ -31,16 +37,21 @@ interface Props {
 }
 
 const columns = [
-  { label: "Residue" },
-  { label: "Proton" },
-  { label: "Multiplicity" },
-  { label: "# protons" },
-  { label: "Chemical shift (PPM)" },
+  { label: "Residue", key: "residue" },
+  { label: "Proton", key: "proton" },
+  { label: "Multiplicity", key: "multiplicity" },
+  { label: "# protons", key: "#protons" },
+  { label: "Chemical shift (PPM)", key: "chemShift" },
+  { label: "", key: "addToCalulator" },
 ];
 
 export const CommonResidueTable = ({ filters, openResidueDetails }: Props) => {
   const theme = useTheme();
   const selectedSolvent = useRecoilValue(nmrSolventState);
+  const setCalculatorState = useSetRecoilState(nmrPurityCalculatorState);
+  const [selectSignalResidue, setSelectSignalResidue] = useState<
+    ICommonResidue | undefined
+  >();
 
   const filterCommonResidues = () => {
     let data = _.tail(commonResidues);
@@ -161,141 +172,188 @@ export const CommonResidueTable = ({ filters, openResidueDetails }: Props) => {
     }
   };
 
-  return (
-    <TableContainer
-      style={{
-        maxHeight: "500px",
-        border: `1px solid ${theme.palette.divider}`,
-        borderRadius: "5px",
-      }}
-    >
-      <Table stickyHeader>
-        <TableHead>
-          <TableRow>
-            {columns.map((c) => (
-              <TableCell
-                key={uuid()}
-                style={{ boxShadow: `0px 1px ${theme.palette.divider}` }}
-              >
-                <b key={uuid()}>{c.label}</b>
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {filterCommonResidues().map((r) => (
-            <TableRow
-              key={uuid()}
-              style={{ cursor: r.smiles ? "pointer" : "" }}
-              hover
-              onClick={() => {
-                if (r.smiles) openResidueDetails(r);
-              }}
-            >
-              <TableCell>{r.compound}</TableCell>
-              <TableCell>
-                <div
-                  key={uuid()}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  {r.signals.map((s, i) =>
-                    typeof s.proton.formula === "string" ? (
-                      <span key={uuid()}>{s.proton.formula}</span>
-                    ) : (
-                      <span key={uuid()}>{s.proton.formula}</span>
-                    )
-                  )}
-                </div>
-              </TableCell>
-              <TableCell>
-                <div
-                  key={uuid()}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  {r.signals.map((s) => (
-                    <span key={uuid()}>
-                      <sub key={uuid()}></sub>
-                      {s.proton.multiplicity}
-                    </span>
-                  ))}
-                </div>
-              </TableCell>
-              <TableCell>
-                <div
-                  key={r.id + "numOfProtons"}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  {r.signals.map((s, i) => (
-                    <span key={uuid()}>
-                      <sub key={uuid()}></sub>
-                      {s.proton.amount}
-                    </span>
-                  ))}
-                </div>
-              </TableCell>
-              <TableCell>
-                <div
-                  key={uuid()}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  {r.signals.map((s) => {
-                    const chemShift = s.chemShifts[selectedSolvent];
-                    const shiftIsFilterHit = checkIfChemShiftIsFilterHit(
-                      s,
-                      chemShift
-                    );
+  const addResidueToCalculator = (residue: ICommonResidue) => {
+    if (residue.signals.length === 1) {
+      setCalculatorState((baseState) =>
+        produce(baseState, (draftState) => {
+          draftState.impurities.push({
+            name: residue.compound,
+            molWeight: residue.molWeight?.toString() || "",
+            numOfProtons: residue.signals[0].proton.amount?.toString() || "",
+            integral: "",
+            molPercent: "",
+            weightPercent: "",
+          });
+        })
+      );
+    } else {
+      setSelectSignalResidue(residue);
+    }
+  };
 
-                    if (typeof chemShift === "object") {
+  return (
+    <>
+      <TableContainer
+        style={{
+          maxHeight: "500px",
+          border: `1px solid ${theme.palette.divider}`,
+          borderRadius: "5px",
+        }}
+      >
+        <Table stickyHeader>
+          <TableHead>
+            <TableRow>
+              {columns.map((c) => (
+                <TableCell
+                  key={c.key}
+                  style={{ boxShadow: `0px 1px ${theme.palette.divider}` }}
+                >
+                  <b>{c.label}</b>
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {filterCommonResidues().map((r, i) => (
+              <TableRow
+                key={"tableRow" + i}
+                style={{ cursor: r.smiles ? "pointer" : "" }}
+                hover
+              >
+                <TableCell
+                  onClick={() => {
+                    if (r.smiles) openResidueDetails(r);
+                  }}
+                >
+                  {r.compound}
+                </TableCell>
+                <TableCell
+                  onClick={() => {
+                    if (r.smiles) openResidueDetails(r);
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    {r.signals.map((s, i) =>
+                      typeof s.proton.formula === "string" ? (
+                        <span key={"string" + i}>{s.proton.formula}</span>
+                      ) : (
+                        <span key={"obj" + i}>{s.proton.formula}</span>
+                      )
+                    )}
+                  </div>
+                </TableCell>
+                <TableCell
+                  onClick={() => {
+                    if (r.smiles) openResidueDetails(r);
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    {r.signals.map((s, i) => (
+                      <span key={"multiplicity" + i}>
+                        <sub></sub>
+                        {s.proton.multiplicity}
+                      </span>
+                    ))}
+                  </div>
+                </TableCell>
+                <TableCell
+                  onClick={() => {
+                    if (r.smiles) openResidueDetails(r);
+                  }}
+                >
+                  <div
+                    key={r.id + "numOfProtons"}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    {r.signals.map((s, i) => (
+                      <span key={"#protons" + i}>
+                        <sub></sub>
+                        {s.proton.amount}
+                      </span>
+                    ))}
+                  </div>
+                </TableCell>
+                <TableCell
+                  onClick={() => {
+                    if (r.smiles) openResidueDetails(r);
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    {r.signals.map((s, i) => {
+                      const chemShift = s.chemShifts[selectedSolvent];
+                      const shiftIsFilterHit = checkIfChemShiftIsFilterHit(
+                        s,
+                        chemShift
+                      );
+
+                      if (typeof chemShift === "object") {
+                        return (
+                          <span key={"chemShiftObj" + i}>
+                            <sub></sub>
+                            {shiftIsFilterHit ? (
+                              <b
+                                style={{ color: theme.palette.secondary.main }}
+                              >
+                                {chemShift?.highShift} - {chemShift?.lowShift}
+                              </b>
+                            ) : (
+                              `${chemShift?.highShift} - ${chemShift?.lowShift}`
+                            )}
+                          </span>
+                        );
+                      }
                       return (
-                        <span key={uuid()}>
-                          <sub key={uuid()}></sub>
+                        <span key={"chemShiftString" + i}>
+                          <sub></sub>
                           {shiftIsFilterHit ? (
-                            <b
-                              key={uuid()}
-                              style={{ color: theme.palette.secondary.main }}
-                            >
-                              {chemShift?.highShift} - {chemShift?.lowShift}
+                            <b style={{ color: theme.palette.secondary.main }}>
+                              {chemShift}
                             </b>
                           ) : (
-                            `${chemShift?.highShift} - ${chemShift?.lowShift}`
+                            chemShift
                           )}
                         </span>
                       );
-                    }
-                    return (
-                      <span key={uuid()}>
-                        <sub key={uuid()}></sub>
-                        {shiftIsFilterHit ? (
-                          <b
-                            key={uuid()}
-                            style={{ color: theme.palette.secondary.main }}
-                          >
-                            {chemShift}
-                          </b>
-                        ) : (
-                          chemShift
-                        )}
-                      </span>
-                    );
-                  })}
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                    })}
+                  </div>
+                </TableCell>
+                <TableCell>
+                  {i !== 0 && (
+                    <IconButton onClick={() => addResidueToCalculator(r)}>
+                      <PlaylistAdd />
+                    </IconButton>
+                  )}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {selectSignalResidue && (
+        <SelectSignalDialog
+          open={true}
+          residue={selectSignalResidue}
+          onClose={() => setSelectSignalResidue(undefined)}
+        />
+      )}
+    </>
   );
 };

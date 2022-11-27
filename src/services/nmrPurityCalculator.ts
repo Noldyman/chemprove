@@ -9,15 +9,7 @@ export const nmrPurityCalculatorState = atom({
       {
         name: "",
         molWeight: "",
-        numOfProtons: "",
-        integral: "",
-        molPercent: "",
-        weightPercent: "",
-      },
-      {
-        name: "",
-        molWeight: "",
-        numOfProtons: "",
+        numOfProtons: "1",
         integral: "",
         molPercent: "",
         weightPercent: "",

@@ -71,7 +71,7 @@ export const PurityCalculator = () => {
     );
   }, [calculatorState, setCalculatorState]);
 
-  const changeMolWeight = (e: ChangeEvent<HTMLInputElement>) => {
+  const changeProductMolWeight = (e: ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
     value = value.replace(",", ".");
     if (value.match(/[^0-9.]/g)) return;
@@ -80,6 +80,21 @@ export const PurityCalculator = () => {
     setCalculatorState((baseState) =>
       produce(baseState, (draftState) => {
         draftState.product.molWeight = value;
+      })
+    );
+  };
+
+  const addPlainImpurity = () => {
+    setCalculatorState((baseState) =>
+      produce(baseState, (draftState) => {
+        draftState.impurities.push({
+          name: "",
+          molWeight: "",
+          numOfProtons: "1",
+          integral: "",
+          molPercent: "",
+          weightPercent: "",
+        });
       })
     );
   };
@@ -137,7 +152,7 @@ export const PurityCalculator = () => {
             size="small"
             inputProps={{ maxLength: 10 }}
             value={calculatorState.product.molWeight}
-            onChange={changeMolWeight}
+            onChange={changeProductMolWeight}
           />
           <Divider orientation="vertical" flexItem={true} />
           <Typography style={{ width: "250px" }}>
@@ -154,6 +169,15 @@ export const PurityCalculator = () => {
         </div>
       </fieldset>
       <ImpurityTable />
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Button
+          style={{ marginTop: "20px", width: "50%", minWidth: "250px" }}
+          variant="contained"
+          onClick={addPlainImpurity}
+        >
+          Add new impurity
+        </Button>
+      </div>
     </>
   );
 };
