@@ -1,15 +1,17 @@
-import { useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { useRecoilState } from "recoil";
 import { nmrPurityCalculatorState } from "../../../services/nmrPurityCalculator";
 import { produce } from "immer";
 import {
   Button,
+  Chip,
   Divider,
   TextField,
+  Tooltip,
   Typography,
   useTheme,
 } from "@mui/material";
-import { Quiz } from "@mui/icons-material";
+import { FileCopy, Quiz } from "@mui/icons-material";
 import { ImpurityTable } from "./ImpurityTable";
 
 export const PurityCalculator = () => {
@@ -17,7 +19,9 @@ export const PurityCalculator = () => {
   const [calculatorState, setCalculatorState] = useRecoilState(
     nmrPurityCalculatorState
   );
+  const [puritySentence, setPuritySentence] = useState("");
 
+  // Calculate purity and impurity percentages
   useEffect(() => {
     setCalculatorState((baseState) =>
       produce(baseState, (draftState) => {
@@ -70,6 +74,63 @@ export const PurityCalculator = () => {
       })
     );
   }, [calculatorState, setCalculatorState]);
+
+  // Create purity sentence
+  useEffect(() => {
+    const createImpurityName = (name: string) => {
+      if (!name) return "unnamed residue";
+      return name.toLowerCase();
+    };
+
+    const filteredImpurities = calculatorState.impurities.filter(
+      (impurity) => parseFloat(impurity.integral) > 0
+    );
+
+    if (
+      filteredImpurities.length < 1 ||
+      isNaN(parseFloat(calculatorState.product.molWeight))
+    ) {
+      return setPuritySentence("");
+    }
+
+    if (filteredImpurities.length === 1) {
+      const impurity = filteredImpurities[0];
+      const molPerc = parseFloat(impurity.molPercent).toFixed(2);
+      const wtPerc = parseFloat(impurity.weightPercent).toFixed(2);
+      if (isNaN(parseFloat(molPerc)) || isNaN(parseFloat(wtPerc)))
+        return setPuritySentence("");
+
+      return setPuritySentence(
+        `Product contains ${wtPerc} wt% ${createImpurityName(
+          impurity.name
+        )} (${molPerc} mol%).`
+      );
+    } else {
+      let sentence = "Product contains ";
+      filteredImpurities.forEach((impurity, index) => {
+        const molPerc = parseFloat(impurity.molPercent).toFixed(2);
+        const wtPerc = parseFloat(impurity.weightPercent).toFixed(2);
+
+        if (isNaN(parseFloat(molPerc)) || isNaN(parseFloat(wtPerc))) {
+          sentence = "";
+          return setPuritySentence("");
+        }
+
+        const impurityPercentages = `${wtPerc} wt% ${createImpurityName(
+          impurity.name
+        )} (${molPerc} mol%)`;
+
+        if (filteredImpurities.length - 1 === index) {
+          sentence += `and ${impurityPercentages}.`;
+        } else if (filteredImpurities.length - 2 === index) {
+          sentence += `${impurityPercentages} `;
+        } else {
+          sentence += `${impurityPercentages}, `;
+        }
+      });
+      return setPuritySentence(sentence);
+    }
+  }, [calculatorState]);
 
   const changeProductMolWeight = (e: ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
@@ -178,6 +239,21 @@ export const PurityCalculator = () => {
           Add new impurity
         </Button>
       </div>
+      {puritySentence && (
+        <Tooltip title="Copy to clipboard" enterDelay={500} followCursor>
+          <Chip
+            style={{
+              width: "100%",
+              padding: "5px 20px",
+              marginTop: "20px",
+            }}
+            label={puritySentence}
+            icon={<FileCopy fontSize="small" />}
+            variant="outlined"
+            onClick={() => navigator.clipboard.writeText(puritySentence)}
+          />
+        </Tooltip>
+      )}
     </>
   );
 };
