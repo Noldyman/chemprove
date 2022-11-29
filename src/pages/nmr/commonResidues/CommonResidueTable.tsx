@@ -19,10 +19,12 @@ import {
   TableCell,
   TableBody,
   IconButton,
+  Tooltip,
 } from "@mui/material";
 import { PlaylistAdd } from "@mui/icons-material";
 import { useState } from "react";
 import { SelectSignalDialog } from "../purityCalculator/SelectSignalDialog";
+import { notificationState } from "../../../services/notifications";
 
 interface IFilters {
   residueName: string;
@@ -52,6 +54,7 @@ export const CommonResidueTable = ({ filters, openResidueDetails }: Props) => {
   const [selectSignalResidue, setSelectSignalResidue] = useState<
     ICommonResidue | undefined
   >();
+  const setNotification = useSetRecoilState(notificationState);
 
   const filterCommonResidues = () => {
     let data = _.tail(commonResidues);
@@ -172,9 +175,9 @@ export const CommonResidueTable = ({ filters, openResidueDetails }: Props) => {
     }
   };
 
-  const addResidueToCalculator = (residue: ICommonResidue) => {
+  const addResidueToCalculator = async (residue: ICommonResidue) => {
     if (residue.signals.length === 1) {
-      setCalculatorState((baseState) =>
+      await setCalculatorState((baseState) =>
         produce(baseState, (draftState) => {
           draftState.impurities.push({
             name: residue.compound,
@@ -186,6 +189,11 @@ export const CommonResidueTable = ({ filters, openResidueDetails }: Props) => {
           });
         })
       );
+      setNotification({
+        isShown: true,
+        message: `${residue.compound} has been added to the purity calculator`,
+        severity: "success",
+      });
     } else {
       setSelectSignalResidue(residue);
     }
@@ -337,9 +345,15 @@ export const CommonResidueTable = ({ filters, openResidueDetails }: Props) => {
                 </TableCell>
                 <TableCell>
                   {i !== 0 && (
-                    <IconButton onClick={() => addResidueToCalculator(r)}>
-                      <PlaylistAdd />
-                    </IconButton>
+                    <Tooltip
+                      title={`Add ${r.compound.toLowerCase()} to purity calculator`}
+                      enterDelay={500}
+                      followCursor
+                    >
+                      <IconButton onClick={() => addResidueToCalculator(r)}>
+                        <PlaylistAdd />
+                      </IconButton>
+                    </Tooltip>
                   )}
                 </TableCell>
               </TableRow>

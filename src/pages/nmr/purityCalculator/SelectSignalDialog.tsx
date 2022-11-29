@@ -7,6 +7,7 @@ import {
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { nmrSolventState } from "../../../services/nmrSolvent";
 import { nmrPurityCalculatorState } from "../../../services/nmrPurityCalculator";
+import { notificationState } from "../../../services/notifications";
 import { produce } from "immer";
 import { nmrSolvents } from "../commonResidues/CommonResidues";
 import {
@@ -42,6 +43,7 @@ export const SelectSignalDialog = ({
   const theme = useTheme();
   const [selectedSolvent, setSelectedSolvent] = useRecoilState(nmrSolventState);
   const setCalculatorState = useSetRecoilState(nmrPurityCalculatorState);
+  const setNotification = useSetRecoilState(notificationState);
 
   const columns = [
     { label: "Proton", key: "proton" },
@@ -67,9 +69,9 @@ export const SelectSignalDialog = ({
     return null;
   };
 
-  const selectSignal = (signalIndex: number) => {
+  const selectSignal = async (signalIndex: number) => {
     if (typeof impurityIndex !== "number") {
-      setCalculatorState((baseState) =>
+      await setCalculatorState((baseState) =>
         produce(baseState, (draftState) => {
           draftState.impurities.push({
             name: residue.compound,
@@ -82,6 +84,11 @@ export const SelectSignalDialog = ({
           });
         })
       );
+      setNotification({
+        isShown: true,
+        message: `${residue.compound} has been added to the purity calculator`,
+        severity: "success",
+      });
     } else {
       setCalculatorState((baseState) =>
         produce(baseState, (draftState) => {

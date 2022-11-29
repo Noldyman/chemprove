@@ -9,6 +9,7 @@ import { CssBaseline } from "@mui/material";
 import { TopBar } from "./TopBar";
 import { Grid, ThemeProvider } from "@mui/material";
 import { SettingsDrawer } from "../components/SettingsDrawer";
+import { Notification } from "../components/Notification";
 
 const App = () => {
   const locaction = useLocation();
@@ -65,6 +66,7 @@ const App = () => {
         </footer>
         <SettingsDrawer isOpen={settingsIsOpen} onClose={handleCloseSettings} />
       </>
+      <Notification />
     </ThemeProvider>
   );
 };

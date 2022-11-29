@@ -2,7 +2,7 @@ import { atom } from "recoil";
 import { INmrPurityCalculatorState } from "../models/nmrPurityCalculator";
 
 export const nmrPurityCalculatorState = atom({
-  key: "NmrPurityCalculatorState",
+  key: "NmrPurityCalculator",
   default: {
     product: { molWeight: "", molPercent: "", weightPercent: "" },
     impurities: [
