@@ -59,7 +59,7 @@ export const ImpurityTable = () => {
               name: params.compound,
               molWeight: params.molWeight?.toString() || "",
               numOfProtons: params.signals[0].proton.amount?.toString() || "",
-              integral: "",
+              integral: baseState.impurities[index].integral,
               molPercent: "",
               weightPercent: "",
             };

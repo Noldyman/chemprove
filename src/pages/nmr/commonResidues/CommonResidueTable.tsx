@@ -179,6 +179,19 @@ export const CommonResidueTable = ({ filters, openResidueDetails }: Props) => {
     if (residue.signals.length === 1) {
       await setCalculatorState((baseState) =>
         produce(baseState, (draftState) => {
+          const oldImpurities = baseState.impurities;
+          if (
+            oldImpurities.length === 1 &&
+            oldImpurities[0].name === "" &&
+            oldImpurities[0].molWeight === "" &&
+            oldImpurities[0].numOfProtons === "1" &&
+            oldImpurities[0].integral === "" &&
+            oldImpurities[0].molPercent === "" &&
+            oldImpurities[0].weightPercent === ""
+          ) {
+            draftState.impurities = [];
+          }
+
           draftState.impurities.push({
             name: residue.compound,
             molWeight: residue.molWeight?.toString() || "",
