@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
 import { ICommonResidue, ISource } from "../models/nmrCommonResidues";
 
 export const sources: ISource[] = [
@@ -18,7 +17,7 @@ export const sources: ISource[] = [
 
 export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Solvent peak",
     trivialNames: "",
     molWeight: null,
@@ -38,7 +37,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Water",
     trivialNames: "H2O",
     smiles: "O",
@@ -67,7 +66,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Acetic acid",
     trivialNames: "AcOH glacial ethanoic",
     smiles: "CC(=O)O",
@@ -96,7 +95,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Acetic anhydride",
     trivialNames: "Acetyl acetate",
     smiles: "CC(=O)OC(=O)C",
@@ -124,7 +123,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Acetone",
     trivialNames: "propanone",
     smiles: "CC(=O)C",
@@ -153,7 +152,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Acetonitrile",
     trivialNames: "ACN MeCN",
     smiles: "CC#N",
@@ -182,7 +181,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "iso-Amyl acetate",
     trivialNames: "Isopentyl acetate",
     smiles: "O=C(OCCC(C)C)C",
@@ -279,7 +278,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "iso-Amyl alcohol",
     trivialNames: "Isopentanol",
     smiles: "OCCC(C)C",
@@ -369,7 +368,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "tert-Amyl methyl ether",
     trivialNames: "TAME",
     smiles: "O(C(C)(C)CC)C",
@@ -455,7 +454,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Anisole",
     trivialNames: "Methoxybenzene",
     smiles: "COc1ccccc1",
@@ -505,7 +504,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Benzene",
     trivialNames: "",
     smiles: "c1ccccc1",
@@ -526,7 +525,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "BHT",
     trivialNames: "2,6-Dimethyl-4-tert-butylphenol",
     smiles: "Cc1cc(C(C)(C)C)cc(c1O)C",
@@ -599,7 +598,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "2-Butanone",
     trivialNames: "Methylethylketone MEK Methylacetone Methylpropanone",
     smiles: "CC(=O)CC",
@@ -670,7 +669,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "iso-Butyl acetate",
     trivialNames: "",
     smiles: "O=C(OCC(C)C)C",
@@ -747,7 +746,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "n-Butyl acetate",
     trivialNames: "Butile",
     smiles: "CCCCOC(=O)C",
@@ -854,7 +853,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "tert-Butyl alcohol",
     trivialNames: "tBuOH 2-methylpropan-2-ol methyl-2-propanol tert-butanol",
     smiles: "OC(C)(C)C",
@@ -895,7 +894,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Chlorobenzene",
     trivialNames: "phenyl chloride",
     smiles: "c1ccc(cc1)Cl",
@@ -915,7 +914,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Chloroform",
     trivialNames: "trichloromethane TCM Methyl trichloride",
     smiles: "C(Cl)(Cl)Cl",
@@ -936,7 +935,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "18-Crown-6",
     trivialNames: "",
     smiles: "O1CCOCCOCCOCCOCCOCC1",
@@ -965,7 +964,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Cyclohexane",
     trivialNames: "Hexanaphthene",
     smiles: "C1CCCCC1",
@@ -994,7 +993,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Cyclohexanone",
     trivialNames: "pimelic ketone",
     smiles: "C1CCCCC1(=O)",
@@ -1060,7 +1059,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Cyclopentyl methyl ether",
     trivialNames: "CPME Methoxycyclopentane",
     smiles: "COC1CCCC1",
@@ -1118,7 +1117,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "p-Cymene",
     trivialNames: "Paracymene 4-Isopropyltoluene",
     smiles: "c1cc(ccc1C(C)C)C",
@@ -1196,7 +1195,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "1,2-Dichloroethane",
     trivialNames: "ethylene dichloride EDC",
     smiles: "ClCCCl",
@@ -1225,7 +1224,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Dichloromethane",
     trivialNames: "DCM methylene chloride",
     smiles: "ClCCl",
@@ -1254,7 +1253,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Diethyl ether",
     trivialNames: "ethoxy ethane",
     smiles: "CCOCC",
@@ -1303,7 +1302,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Diglyme",
     trivialNames: "bis(2-methoxyethyl) ether Diethylene glycol dimethyl ether",
     smiles: "COCCOCCOC",
@@ -1372,7 +1371,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "1,2-Dimethoxyethane",
     trivialNames: "Glyme Monoglyme dimethyl glycol dimethyl ether DME",
     smiles: "COCCOC",
@@ -1421,7 +1420,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Dimethylacetamide",
     trivialNames: "DMAc DMA N,N-Dimethylacetamide",
     smiles: "CN(C)C(=O)C",
@@ -1490,7 +1489,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Dimethyl carbonate",
     trivialNames: "DMC",
     smiles: "COC(=O)OC",
@@ -1518,7 +1517,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Dimethylformamide",
     trivialNames: "DMF N,N-Dimethylformamide",
     smiles: "CN(C)C(=O)",
@@ -1579,7 +1578,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Dimethyl sulfoxide",
     trivialNames: "DMSO (Methanesulfinyl)methane",
     smiles: "CS(=O)C",
@@ -1608,7 +1607,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "1,4-Dioxane",
     trivialNames: "1,4-Dioxacyclohexane",
     smiles: "O1CCOCC1",
@@ -1637,7 +1636,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "DMPU",
     trivialNames: "1,3-Dimethyl-3,4,5,6-tetrahydro-2(1H)-pyrimidinone",
     smiles: "O=C1N(C)CCCN1C",
@@ -1703,7 +1702,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Ethane",
     trivialNames: "",
     smiles: "CC",
@@ -1732,7 +1731,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Ethanol",
     trivialNames: "EtOH alcohol ethyl alcohol",
     smiles: "CCO",
@@ -1793,7 +1792,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Ethyl acetate",
     trivialNames: "EtOAc ETAC EA",
     smiles: "CCOC(=O)C",
@@ -1864,7 +1863,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Ethyl benzene",
     trivialNames: "",
     smiles: "c1ccccc1(CC)",
@@ -1944,7 +1943,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Ethylene",
     trivialNames: "Ethene",
     smiles: "C=C",
@@ -1973,7 +1972,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Ethylene glycol",
     trivialNames: "Ethylene alcohol 1,2-Dihydroxyethane",
     smiles: "OCCO",
@@ -2016,7 +2015,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Ethylene glycol diacetate",
     trivialNames: "",
     smiles: "CC(=O)OCCOC(=O)C",
@@ -2063,7 +2062,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "L-Ethyl lactate",
     trivialNames: "Acytol",
     smiles: "C[C@H](O)C(OCC)=O",
@@ -2153,7 +2152,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Ethyl tert-butyl ether",
     trivialNames: "ETBE",
     smiles: "O(C(C)(C)C)CC",
@@ -2219,7 +2218,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Formic acid",
     trivialNames: "Methanoic acid",
     smiles: "O=CO",
@@ -2239,7 +2238,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "n-Heptane",
     trivialNames: "Septane",
     smiles: "CCCCCCC",
@@ -2286,7 +2285,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Hexamethylbenzene",
     trivialNames: "Mellitene",
     smiles: "c1(c(c(c(c(c1C)C)C)C)C)C",
@@ -2315,7 +2314,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Hexamethyldisiloxane",
     trivialNames: "HMDSO Bis(trimethylsilyl) ether",
     smiles: "O([Si](C)(C)C)[Si](C)(C)C",
@@ -2344,7 +2343,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Hexamethylphosphoramide",
     smiles: "O=P(N(C)C)(N(C)C)N(C)C",
     trivialNames: "HMPA",
@@ -2373,7 +2372,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "n-Hexane",
     trivialNames: "",
     smiles: "CCCCCC",
@@ -2422,7 +2421,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Hydrogen",
     trivialNames: "H2",
     smiles: "[HH]",
@@ -2451,7 +2450,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Imidazole",
     trivialNames: "",
     smiles: "c1cnc[nH]1",
@@ -2485,7 +2484,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
   },
 
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Methane",
     trivialNames: "",
     smiles: "C",
@@ -2514,7 +2513,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Methanol",
     trivialNames: "MeOH methyl alcohol Hydroxymethane",
     smiles: "CO",
@@ -2555,7 +2554,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Methyl acetate",
     trivialNames: "",
     smiles: "O=C(OC)C",
@@ -2602,7 +2601,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Methyl iso-butyl ketone",
     trivialNames: "MIBK",
     smiles: "CC(C)CC(=O)C",
@@ -2680,7 +2679,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Methyl tert-butyl ether",
     trivialNames: "MTBE",
     smiles: "O(C(C)(C)C)C",
@@ -2727,7 +2726,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "2-Methyl tetrahydrofuran",
     trivialNames: "Methyl THF",
     smiles: "O1C(C)CCC1",
@@ -2843,7 +2842,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Nitromethane",
     trivialNames: "Nitrocarbol",
     smiles: "C[N+](=O)[O-]",
@@ -2872,7 +2871,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "n-Pentane",
     trivialNames: "",
     smiles: "CCCCC",
@@ -2921,7 +2920,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Propane",
     trivialNames: "",
     smiles: "CCC",
@@ -2970,7 +2969,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "iso-Propanol",
     trivialNames: "Isopropyl alcohol Isopropanol IPA",
     smiles: "OC(C)C",
@@ -3011,7 +3010,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "iso-Propyl acetate",
     trivialNames: "",
     smiles: "CC(=O)OC(C)C",
@@ -3070,7 +3069,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Propylene",
     trivialNames: "propene",
     smiles: "CC=C",
@@ -3151,7 +3150,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Pyridine",
     trivialNames: "Azabenzene Azine",
     smiles: "c1ccncc1",
@@ -3196,7 +3195,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Pyrrole",
     trivialNames: "Azole Imidole",
     smiles: "[nH]1cccc1",
@@ -3241,7 +3240,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Pyrrolidine",
     trivialNames: "Tetrahydropyrrole Azolidine Prolamine",
     smiles: "C1CCNC1",
@@ -3290,7 +3289,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Sulfolane",
     trivialNames: "Tetramethylene sulfone",
     smiles: "C1CCS(=O)(=O)C1",
@@ -3337,7 +3336,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Tetrahydrofuran",
     trivialNames: "THF Oxolane",
     smiles: "O1CCCC1",
@@ -3386,7 +3385,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Toluene",
     trivialNames: "MeBn toluol methylbenzene",
     smiles: "c1ccccc1C",
@@ -3447,7 +3446,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "Triethylamine",
     trivialNames: "TEA",
     smiles: "CCN(CC)CC",
@@ -3496,7 +3495,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "1,2-Xylene",
     trivialNames: "",
     smiles: "Cc1c(C)cccc1",
@@ -3535,7 +3534,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "1,3-Xylene",
     trivialNames: "",
     smiles: "Cc1cc(C)ccc1",
@@ -3586,7 +3585,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
     ],
   },
   {
-    id: uuidv4(),
+    id: crypto.randomUUID(),
     compound: "1,4-Xylene",
     trivialNames: "",
     smiles: "Cc1ccc(C)cc1",
@@ -3627,7 +3626,7 @@ export const H_NMR_COMMON_RESIDUES: ICommonResidue[] = [
 ];
 
 // {
-//   id: uuidv4(),
+//   id: crypto.randomUUID(),
 //   compound: '',
 //   trivialNames: '' ,
 //   molWeight: ,
