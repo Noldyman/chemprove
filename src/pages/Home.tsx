@@ -40,7 +40,7 @@ export const Home = () => {
           </Typography>
           <div style={{ display: "flex", gap: "25px" }}>
             {pages.map((page) => (
-              <Card elevation={7} style={{ maxWidth: "300px" }}>
+              <Card key={page.path} elevation={7} style={{ maxWidth: "300px" }}>
                 <CardActionArea onClick={() => navigate(page.path)}>
                   <CardContent>
                     <Typography variant="h5">{page.label}</Typography>

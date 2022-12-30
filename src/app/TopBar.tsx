@@ -25,13 +25,16 @@ export const TopBar = ({ onSettings }: Props) => {
   const theme = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useState<number | false>(false);
 
   useEffect(() => {
-    const locationTabIndex =
-      1 + navItems.findIndex((item) => item.path === location.pathname);
+    const locationTabIndex = navItems.findIndex(
+      (item) => item.path === location.pathname
+    );
     if (locationTabIndex >= 0 && locationTabIndex !== selectedTab) {
-      setSelectedTab(locationTabIndex);
+      setSelectedTab(locationTabIndex + 1);
+    } else {
+      setSelectedTab(false);
     }
   }, [location, selectedTab]);
 
@@ -49,7 +52,7 @@ export const TopBar = ({ onSettings }: Props) => {
         <Typography
           style={{ cursor: "pointer" }}
           onClick={() => {
-            setSelectedTab(0);
+            setSelectedTab(false);
             navigate("/");
           }}
           position="absolute"
