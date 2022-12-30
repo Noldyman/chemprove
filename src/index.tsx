@@ -5,10 +5,11 @@ import App from "./app/App";
 import reportWebVitals from "./reportWebVitals";
 import { RecoilRoot } from "recoil";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Home } from "./pages/Home";
 import { Nmr } from "./pages/nmr/Nmr";
-import { NotFound } from "./pages/NotFound";
-import { Manual } from "./pages/manual/Manual";
 import { Lcms } from "./pages/lcms/Lcms";
+import { Manual } from "./pages/manual/Manual";
+import { NotFound } from "./pages/NotFound";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -20,6 +21,8 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
+            <Route path="/" element={<Home />} />
+
             <Route path="/nmr" element={<Nmr />} />
             <Route path="/lcms" element={<Lcms />} />
             <Route path="/manual" element={<Manual />} />

@@ -1,9 +1,9 @@
 import "./App.css";
 import pjson from "../../package.json";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { selectedThemeState } from "../services/theme";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { darkTheme, lightTheme } from "../themes/themes";
 import { CssBaseline } from "@mui/material";
 import { TopBar } from "./TopBar";
@@ -12,14 +12,8 @@ import { SettingsDrawer } from "../components/SettingsDrawer";
 import { Notification } from "../components/Notification";
 
 const App = () => {
-  const locaction = useLocation();
-  const navigate = useNavigate();
   const [settingsIsOpen, setSettingsIsOpen] = useState(false);
   const selectedTheme = useRecoilValue(selectedThemeState);
-
-  useEffect(() => {
-    if (locaction.pathname === "/") navigate("/nmr");
-  }, [locaction, navigate]);
 
   const handleOpenSettings = () => setSettingsIsOpen(true);
   const handleCloseSettings = () => setSettingsIsOpen(false);

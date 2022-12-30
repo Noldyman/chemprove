@@ -28,16 +28,15 @@ export const TopBar = ({ onSettings }: Props) => {
   const [selectedTab, setSelectedTab] = useState(0);
 
   useEffect(() => {
-    const locationTabIndex = navItems.findIndex(
-      (item) => item.path === location.pathname
-    );
+    const locationTabIndex =
+      1 + navItems.findIndex((item) => item.path === location.pathname);
     if (locationTabIndex >= 0 && locationTabIndex !== selectedTab) {
       setSelectedTab(locationTabIndex);
     }
   }, [location, selectedTab]);
 
   const selectTab = (index: number, path: string) => {
-    setSelectedTab(index);
+    setSelectedTab(index + 1);
     navigate(path);
   };
 
@@ -49,7 +48,10 @@ export const TopBar = ({ onSettings }: Props) => {
       <Toolbar>
         <Typography
           style={{ cursor: "pointer" }}
-          onClick={() => navigate("/")}
+          onClick={() => {
+            setSelectedTab(0);
+            navigate("/");
+          }}
           position="absolute"
           variant="h5"
         >
@@ -64,7 +66,7 @@ export const TopBar = ({ onSettings }: Props) => {
           {navItems.map((item, i) => (
             <Tab
               key={item.label + i}
-              value={i}
+              value={i + 1}
               label={item.label}
               onClick={() => selectTab(i, item.path)}
             />
