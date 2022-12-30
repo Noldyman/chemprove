@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Nmr } from "./pages/nmr/Nmr";
 import { NotFound } from "./pages/NotFound";
 import { Manual } from "./pages/manual/Manual";
+import { Lcms } from "./pages/lcms/Lcms";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -20,6 +21,7 @@ root.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route path="/nmr" element={<Nmr />} />
+            <Route path="/lcms" element={<Lcms />} />
             <Route path="/manual" element={<Manual />} />
             <Route path="*" element={<NotFound />} />
           </Route>
