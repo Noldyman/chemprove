@@ -169,7 +169,7 @@ export const CommonResidues = () => {
           <TextField
             style={{ width: "13%" }}
             name="deviation"
-            label="deviation"
+            label="Deviation"
             size="small"
             inputProps={{ maxLength: 6 }}
             value={filters.deviation}
