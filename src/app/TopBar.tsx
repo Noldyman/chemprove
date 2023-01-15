@@ -12,6 +12,7 @@ import {
 import { Settings } from "@mui/icons-material";
 
 const navItems = [
+  { label: "General", path: "/general" },
   { label: "NMR", path: "/nmr" },
   { label: "LC-MS", path: "/lcms" },
   { label: "Manual", path: "/manual" },

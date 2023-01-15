@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { RecoilRoot } from "recoil";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
+import { General } from "./pages/general/General";
 import { Nmr } from "./pages/nmr/Nmr";
 import { Lcms } from "./pages/lcms/Lcms";
 import { Manual } from "./pages/manual/Manual";
@@ -22,7 +23,7 @@ root.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route path="/" element={<Home />} />
-
+            <Route path="/general" element={<General />} />
             <Route path="/nmr" element={<Nmr />} />
             <Route path="/lcms" element={<Lcms />} />
             <Route path="/manual" element={<Manual />} />

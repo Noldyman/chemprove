@@ -11,6 +11,12 @@ import { useNavigate } from "react-router-dom";
 
 const pages = [
   {
+    label: "General",
+    path: "/general",
+    description:
+      "Convert units of different quantities and calculate with concentrations.",
+  },
+  {
     label: "NMR",
     path: "/nmr",
     description:
@@ -40,9 +46,12 @@ export const Home = () => {
           </Typography>
           <div style={{ display: "flex", gap: "25px" }}>
             {pages.map((page) => (
-              <Card key={page.path} elevation={7} style={{ maxWidth: "300px" }}>
-                <CardActionArea onClick={() => navigate(page.path)}>
-                  <CardContent>
+              <Card key={page.path} elevation={7} style={{ width: "300px" }}>
+                <CardActionArea
+                  style={{ height: "100%" }}
+                  onClick={() => navigate(page.path)}
+                >
+                  <CardContent style={{ height: "100%" }}>
                     <Typography variant="h5">{page.label}</Typography>
                     <Divider style={{ margin: "5px 0px" }} />
                     <Typography>{page.description}</Typography>
