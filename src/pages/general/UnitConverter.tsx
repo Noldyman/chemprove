@@ -18,7 +18,7 @@ import {
   UnitConverterNotation,
   UnitConverterQuantity,
 } from "../../models/unitConverter";
-import { unitsAndConversions } from "./unitsAndConversions";
+import { unitsAndConversions } from "../../data/unitsAndConversions";
 
 const quantities = [
   { label: "Mass", value: "mass" },
