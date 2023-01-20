@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { TabPanel } from "../../components/TabPanel";
 import { UnitConverter } from "./UnitConverter";
+import { ConcentrationCalculator } from "./ConcentrationCalculator";
 
 export const General = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -31,7 +32,7 @@ export const General = () => {
               </Typography>
               <Tabs centered value={selectedTab} onChange={handleTabChange}>
                 <Tab label="Unit converter" />
-                <Tab label="Concentrations" />
+                <Tab label="Concentration calculator" />
               </Tabs>
             </div>
           }
@@ -41,7 +42,9 @@ export const General = () => {
           <TabPanel value={selectedTab} index={0}>
             <UnitConverter />
           </TabPanel>
-          <TabPanel value={selectedTab} index={1}></TabPanel>
+          <TabPanel value={selectedTab} index={1}>
+            <ConcentrationCalculator />
+          </TabPanel>
         </CardContent>
       </Card>
     </Grid>

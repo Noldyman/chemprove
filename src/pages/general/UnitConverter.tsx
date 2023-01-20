@@ -13,11 +13,8 @@ import {
 } from "@mui/material";
 import { AddCircle, RemoveCircle, SwapHoriz } from "@mui/icons-material";
 import { useRecoilState } from "recoil";
-import { unitConverterSettingsState } from "../../services/unitConverterSettings";
-import {
-  UnitConverterNotation,
-  UnitConverterQuantity,
-} from "../../models/unitConverter";
+import { generealSettingsState } from "../../services/generalSettings";
+import { Notation, UnitConverterQuantity } from "../../models/general";
 import { unitsAndConversions } from "../../data/unitsAndConversions";
 
 const quantities = [
@@ -35,19 +32,19 @@ export const UnitConverter = () => {
     inputUnit: "",
     outputUnit: "",
   });
-  const [settings, setSettings] = useRecoilState(unitConverterSettingsState);
+  const [settings, setSettings] = useRecoilState(generealSettingsState);
 
   useEffect(() => {
     if (
-      unitsAndConversions[settings.quantity].length &&
+      unitsAndConversions[settings.convQuantity].length &&
       input.inputUnit &&
       input.outputUnit
     ) {
       const inputValue = parseFloat(input.input);
-      const convertToBase = unitsAndConversions[settings.quantity].find(
+      const convertToBase = unitsAndConversions[settings.convQuantity].find(
         (u) => u.value === input.inputUnit
       )?.convertToBase;
-      const convertFromBase = unitsAndConversions[settings.quantity].find(
+      const convertFromBase = unitsAndConversions[settings.convQuantity].find(
         (u) => u.value === input.outputUnit
       )?.convertFromBase;
       if (!convertToBase || !convertFromBase) return;
@@ -68,15 +65,15 @@ export const UnitConverter = () => {
   useEffect(() => {
     setInput((prevValue) => ({
       ...prevValue,
-      inputUnit: unitsAndConversions[settings.quantity][0].value,
-      outputUnit: unitsAndConversions[settings.quantity][1].value,
+      inputUnit: unitsAndConversions[settings.convQuantity][0].value,
+      outputUnit: unitsAndConversions[settings.convQuantity][1].value,
     }));
-  }, [settings.quantity]);
+  }, [settings.convQuantity]);
 
   const handleQuantityChange = (e: any) => {
     setSettings((prevValue) => ({
       ...prevValue,
-      quantity: e.target.value as UnitConverterQuantity,
+      convQuantity: e.target.value as UnitConverterQuantity,
     }));
   };
 
@@ -84,7 +81,7 @@ export const UnitConverter = () => {
     if (newNotation && newNotation !== settings.notation) {
       setSettings((prevValue) => ({
         ...prevValue,
-        notation: newNotation as UnitConverterNotation,
+        notation: newNotation as Notation,
       }));
     }
   };
@@ -106,7 +103,9 @@ export const UnitConverter = () => {
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInput((prevValue) => ({ ...prevValue, input: e.target.value }));
+    let value = e.target.value;
+    value = value.replace(",", ".");
+    setInput((prevValue) => ({ ...prevValue, input: value }));
   };
 
   const handleUnitChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -160,7 +159,7 @@ export const UnitConverter = () => {
             label="Quantity"
             select
             size="small"
-            value={settings.quantity}
+            value={settings.convQuantity}
             onChange={handleQuantityChange}
           >
             {quantities.map((q) => (
@@ -215,7 +214,7 @@ export const UnitConverter = () => {
             style={{ width: "300px" }}
             label="Input"
             size="small"
-            type="number"
+            error={Boolean(input.input && isNaN(parseFloat(input.input)))}
             value={input.input}
             onChange={handleInputChange}
           />
@@ -228,7 +227,7 @@ export const UnitConverter = () => {
             label="Unit"
             size="small"
           >
-            {unitsAndConversions[settings.quantity].map((u) => (
+            {unitsAndConversions[settings.convQuantity].map((u) => (
               <MenuItem value={u.value} key={u.value} title={u.fullName}>
                 {u.label}
               </MenuItem>
@@ -256,7 +255,7 @@ export const UnitConverter = () => {
             label="Unit"
             size="small"
           >
-            {unitsAndConversions[settings.quantity].map((u) => (
+            {unitsAndConversions[settings.convQuantity].map((u) => (
               <MenuItem value={u.value} key={u.value} title={u.fullName}>
                 {u.label}
               </MenuItem>
