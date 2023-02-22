@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { FileCopy, Quiz } from "@mui/icons-material";
 import { ImpurityTable } from "./ImpurityTable";
+import { UserManual } from "./UserManual";
 
 export const PurityCalculator = () => {
   const theme = useTheme();
@@ -20,6 +21,7 @@ export const PurityCalculator = () => {
     nmrPurityCalculatorState
   );
   const [puritySentence, setPuritySentence] = useState("");
+  const [manualIsOpen, setManualIsOpen] = useState(false);
 
   // Calculate purity and impurity percentages
   useEffect(() => {
@@ -167,10 +169,9 @@ export const PurityCalculator = () => {
       </Typography>
       <Divider />
       <Typography style={{ margin: "20px 0px" }} align={"center"}>
-        This tool can be used to calculate the purity of your product based on
-        NMR analysis. Specify the molecular weight of your product and add the
-        residues you observe in your NMR spectrum. The purity of your product
-        and the percentages of each residue will be calculated automatically.
+        After performing <sup>1</sup>H NMR analysis, this tool can be used to
+        calculate the purity of your product and the percentages of the
+        impurities you observe.
       </Typography>
       <div style={{ margin: "auto", width: "400px", marginBottom: "20px" }}>
         <Button
@@ -178,6 +179,7 @@ export const PurityCalculator = () => {
           startIcon={<Quiz />}
           variant="outlined"
           color="inherit"
+          onClick={() => setManualIsOpen(true)}
         >
           Manual
         </Button>
@@ -254,6 +256,7 @@ export const PurityCalculator = () => {
           />
         </Tooltip>
       )}
+      <UserManual open={manualIsOpen} onClose={() => setManualIsOpen(false)} />
     </>
   );
 };
