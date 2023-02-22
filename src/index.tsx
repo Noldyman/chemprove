@@ -9,7 +9,6 @@ import { Home } from "./pages/Home";
 import { General } from "./pages/general/General";
 import { Nmr } from "./pages/nmr/Nmr";
 import { Lcms } from "./pages/lcms/Lcms";
-import { Manual } from "./pages/manual/Manual";
 import { NotFound } from "./pages/NotFound";
 
 const root = ReactDOM.createRoot(
@@ -26,7 +25,6 @@ root.render(
             <Route path="/general" element={<General />} />
             <Route path="/nmr" element={<Nmr />} />
             <Route path="/lcms" element={<Lcms />} />
-            <Route path="/manual" element={<Manual />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

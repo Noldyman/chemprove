@@ -14,6 +14,7 @@ import { Bookmarks, HighlightOff, Quiz } from "@mui/icons-material";
 import { CommonResidueTable } from "./CommonResidueTable";
 import { ResidueDetails } from "./ResidueDetails";
 import { Sources } from "./Sources";
+import { UserManual } from "./UserManual";
 
 export const nmrSolvents: { label: string; value: NmrSolvent }[] = [
   { label: "Chloroform d", value: "chloroform_d" },
@@ -42,6 +43,7 @@ export const CommonResidues = () => {
     ICommonResidue | undefined
   >();
   const [sourcesIsOpen, setSourcesIsOpen] = useState(false);
+  const [manualIsOpen, setManualIsOpen] = useState(false);
 
   const handleSolventChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedSolvent(e.target.value as NmrSolvent);
@@ -91,7 +93,7 @@ export const CommonResidues = () => {
       <Typography style={{ margin: "20px 0px" }} align={"center"}>
         This table shows the chemical shifts of common residual solvents and
         residues in <sup>1</sup>H NMR spectroscopy. The table can be used to
-        identify your residues.
+        identify your impurities.
       </Typography>
       <div style={{ display: "flex", gap: "20px", marginBottom: "20px" }}>
         <Button
@@ -108,6 +110,7 @@ export const CommonResidues = () => {
           startIcon={<Quiz />}
           variant="outlined"
           color="inherit"
+          onClick={() => setManualIsOpen(true)}
         >
           Manual
         </Button>
@@ -220,6 +223,7 @@ export const CommonResidues = () => {
         />
       )}
       <Sources open={sourcesIsOpen} onClose={() => setSourcesIsOpen(false)} />
+      <UserManual open={manualIsOpen} onClose={() => setManualIsOpen(false)} />
     </>
   );
 };
