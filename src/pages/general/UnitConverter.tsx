@@ -130,7 +130,7 @@ export const UnitConverter = () => {
       </Typography>
       <Divider />
       <Typography style={{ margin: "20px 0px" }} align={"center"}>
-        You can use this tool to convert the units of different quantities.
+        This tool allows you to convert the units of different quantities.
       </Typography>
       <fieldset
         style={{
