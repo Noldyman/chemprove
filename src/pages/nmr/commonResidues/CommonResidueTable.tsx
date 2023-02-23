@@ -324,7 +324,7 @@ export const CommonResidueTable = ({ filters, openResidueDetails }: Props) => {
                         s,
                         chemShift
                       );
-
+                      if (!chemShift) return <span key={"null" + i}>-</span>;
                       if (typeof chemShift === "object") {
                         return (
                           <span key={"chemShiftObj" + i}>
@@ -333,10 +333,13 @@ export const CommonResidueTable = ({ filters, openResidueDetails }: Props) => {
                               <b
                                 style={{ color: theme.palette.secondary.main }}
                               >
-                                {chemShift?.highShift} - {chemShift?.lowShift}
+                                {chemShift?.highShift.toFixed(2)} -{" "}
+                                {chemShift?.lowShift.toFixed(2)}
                               </b>
                             ) : (
-                              `${chemShift?.highShift} - ${chemShift?.lowShift}`
+                              `${chemShift?.highShift.toFixed(
+                                2
+                              )} - ${chemShift?.lowShift.toFixed(2)}`
                             )}
                           </span>
                         );
@@ -346,10 +349,10 @@ export const CommonResidueTable = ({ filters, openResidueDetails }: Props) => {
                           <sub></sub>
                           {shiftIsFilterHit ? (
                             <b style={{ color: theme.palette.secondary.main }}>
-                              {chemShift}
+                              {chemShift.toFixed(2)}
                             </b>
                           ) : (
-                            chemShift
+                            chemShift.toFixed(2)
                           )}
                         </span>
                       );
