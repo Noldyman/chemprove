@@ -1,8 +1,4 @@
 # Chemprove
 
-A website with utilities for organic chemists.
-
-### To start the app
-
-1. Run `npm install`
-2. Run `npm start`
+Chemprove is a website that provides a variety of tools designed to help organic chemists with complex calculations and analyses.
+The site is hosted at https://chemprove.com.
