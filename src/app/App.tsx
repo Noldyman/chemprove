@@ -56,7 +56,7 @@ const App = () => {
           onClick={() => window.open("https://github.com/Noldyman/chemprove")}
           className="footer"
         >
-          {pjson.name} {pjson.version}
+          {"Chemprove " + pjson.version}
         </footer>
         <SettingsDrawer isOpen={settingsIsOpen} onClose={handleCloseSettings} />
       </>
