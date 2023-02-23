@@ -64,8 +64,8 @@ export const SettingsDrawer = ({ isOpen, onClose }: Props) => {
         <div>
           <Typography variant="h6">Contact</Typography>
           <Typography>
-            Get in touch with me if you have any questions, feature requests or
-            if you've found a bug in the site. Send me an email or create an
+            Get in touch if you have any questions, feature requests or if
+            you've found a bug in the site. Either send an email or create an
             issue on GitHub.
           </Typography>
           <div style={{ marginTop: "5px", display: "flex", gap: "10px" }}>
