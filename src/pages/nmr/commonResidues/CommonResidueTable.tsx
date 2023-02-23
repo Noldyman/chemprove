@@ -345,16 +345,32 @@ export const CommonResidueTable = ({ filters, openResidueDetails }: Props) => {
                         );
                       }
                       return (
-                        <span key={"chemShiftString" + i}>
-                          <sub></sub>
-                          {shiftIsFilterHit ? (
-                            <b style={{ color: theme.palette.secondary.main }}>
-                              {chemShift.toFixed(2)}
-                            </b>
-                          ) : (
-                            chemShift.toFixed(2)
-                          )}
-                        </span>
+                        <>
+                          <span key={"chemShiftString" + i}>
+                            <sub></sub>
+                            {shiftIsFilterHit ? (
+                              <b
+                                style={{ color: theme.palette.secondary.main }}
+                              >
+                                {chemShift.toFixed(2)}
+                              </b>
+                            ) : (
+                              chemShift.toFixed(2)
+                            )}
+                            {selectedSolvent === "chloroform_d" &&
+                              r.compound === "Acetonitrile" && (
+                                <b
+                                  style={{
+                                    color: shiftIsFilterHit
+                                      ? theme.palette.secondary.main
+                                      : "",
+                                  }}
+                                >
+                                  *
+                                </b>
+                              )}
+                          </span>
+                        </>
                       );
                     })}
                   </div>

@@ -215,6 +215,13 @@ export const CommonResidues = () => {
         filters={filters}
         openResidueDetails={openResidueDetails}
       />
+      {selectedSolvent === "chloroform_d" && (
+        <Typography variant="body1" marginTop={2}>
+          <b>*</b> According to the sources that were used for this table, the
+          chemical shift of Acetonitrile is 2.10 PPM in Chloroform d. However,
+          the experimental value is 2.01 PPM.
+        </Typography>
+      )}
       {residueDetails && (
         <ResidueDetails
           open={Boolean(residueDetails)}
