@@ -21,11 +21,7 @@ interface Props {
   deviation: number;
 }
 
-export const CommonIonsTables = ({
-  exactMass,
-  observedMz,
-  deviation,
-}: Props) => {
+export const CommonIonsTables = ({ exactMass, observedMz, deviation }: Props) => {
   const theme = useTheme();
 
   const columns = [
@@ -116,6 +112,15 @@ export const CommonIonsTables = ({
       ),
       buildUp: "M + 47",
       mz: (exactMass) => exactMass + 47,
+    },
+    {
+      adduct: (
+        <span>
+          [M+CH<sub>3</sub>CN+NH<sub>4</sub>]<sup>+</sup>
+        </span>
+      ),
+      buildUp: "M + 59",
+      mz: (exactMass) => exactMass + 59,
     },
     {
       adduct: (
@@ -282,20 +287,13 @@ export const CommonIonsTables = ({
       <Table stickyHeader size="small">
         <TableHead>
           <TableRow>
-            <TableCell
-              key="positiveIons"
-              colSpan={3}
-              style={{ borderBottom: `0px` }}
-            >
+            <TableCell key="positiveIons" colSpan={3} style={{ borderBottom: `0px` }}>
               <b style={{ fontSize: "16px" }}>{title}</b>
             </TableCell>
           </TableRow>
           <TableRow>
             {columns.map((c) => (
-              <TableCell
-                key={c.key}
-                style={{ boxShadow: `0px 1px ${theme.palette.divider}` }}
-              >
+              <TableCell key={c.key} style={{ boxShadow: `0px 1px ${theme.palette.divider}` }}>
                 <b>{c.label}</b>
               </TableCell>
             ))}
@@ -306,9 +304,7 @@ export const CommonIonsTables = ({
             <TableRow key={i}>
               <TableCell key={"ion" + i}>{ion.adduct}</TableCell>
               <TableCell key={"buildup" + i}>{ion.buildUp}</TableCell>
-              <TableCell key={"mz" + i}>
-                {displayMz(ion.mz(exactMass))}
-              </TableCell>
+              <TableCell key={"mz" + i}>{displayMz(ion.mz(exactMass))}</TableCell>
             </TableRow>
           ))}
         </TableBody>
